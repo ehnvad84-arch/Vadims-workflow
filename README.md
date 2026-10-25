@@ -10,7 +10,8 @@
 | Путь | Что |
 |---|---|
 | `WORKFLOW.md` | процесс целиком: принципы, этапы и гейты, контекст, модели, субагенты, Git, безопасность |
-| `agents/` | 5 субагентов: `backend-architect`, `ui-designer`, `frontend-developer`, `code-reviewer`, `debugger` |
+| `agents/` | 7 субагентов: `plan-reviewer`, `backend-architect`, `ui-designer`, `frontend-developer`, `test-writer`, `code-reviewer`, `debugger` |
+| `skills/` | 6 скиллов: `/office-hours`, `/qa`, `/cso`, `/careful`, `/freeze`, `/unfreeze` (методы — по gstack, см. `NOTICE.md`) |
 | `prompts/` | промпт планирования (для инструментов без plan mode) и промпт итерации Ralph loop |
 | `templates/` | `AGENTS.md`, правила проекта, PRD, артефакты фичи, шаблон PR |
 | `scripts/` | `init.sh`, `install-agents.sh`, `feature.sh`, `ralph.sh` |
@@ -20,8 +21,13 @@
 ```bash
 git clone https://github.com/ehnvad84-arch/Vadims-workflow.git ~/projects/Vadims-workflow
 
-# один раз на машину: подключить субагентов к Claude Code (симлинки в ~/.claude/agents)
+# один раз на машину: подключить субагентов и скиллы к Claude Code (симлинки в ~/.claude/agents и ~/.claude/skills)
 ~/projects/Vadims-workflow/scripts/install-agents.sh
+
+# один раз на машину: сканер конфигурации агента и браузер для /qa
+npm install -g --prefix ~/.local ecc-agentshield@1.6.0
+claude mcp add --scope user playwright -- npx -y @playwright/mcp@0.0.83 --browser chromium --headless --isolated
+npx -y playwright@1.64.0-alpha-1790635538000 install chromium
 
 # в каждый проект
 ~/projects/Vadims-workflow/scripts/init.sh /path/to/project

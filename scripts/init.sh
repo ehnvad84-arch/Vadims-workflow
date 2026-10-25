@@ -39,7 +39,7 @@ echo "Vadims workflow → $dst"
 #    Шаблоны AGENTS.md и правил сюда не кладём: в проекте живут только их заполненные версии.
 rm -rf "$dst/.workflow"
 mkdir -p "$dst/.workflow/templates"
-cp -R "$src/WORKFLOW.md" "$src/agents" "$src/prompts" "$dst/.workflow/"
+cp -R "$src/WORKFLOW.md" "$src/NOTICE.md" "$src/agents" "$src/skills" "$src/prompts" "$dst/.workflow/"
 cp -R "$src/templates/PRD.md" "$src/templates/work" "$dst/.workflow/templates/"
 cp "$src/scripts/feature.sh" "$src/scripts/ralph.sh" "$dst/.workflow/"
 git -C "$src" rev-parse --short HEAD > "$dst/.workflow/VERSION" 2>/dev/null || echo unknown > "$dst/.workflow/VERSION"
